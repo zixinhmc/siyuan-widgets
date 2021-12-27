@@ -1,0 +1,41 @@
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+}
+
+body {
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  @apply font-sans;
+  width: 100vw;
+  height: 100vh;
+}
+
+:root {
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.absolute-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.absolute-center-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -7,27 +7,23 @@
 <script lang="ts" setup>
   import { watch } from 'vue';
   import { useFetch } from '@/utils/useFetch';
+  import { path, useParameter, ResultData } from '@/types/http/httpSql';
   import HelloWorld from './components/HelloWorld.vue';
 
-  const sql =
+  const parameter = useParameter();
+  parameter.stmt =
     'SELECT * FROM blocks WHERE path regexp "^/20211116085932-8rwiuh5" and path regexp "/{1}" and type = "d"';
 
-  const { data } = useFetch(
-    'api/query/sql',
+  const { data } = useFetch<ResultData[]>(
+    path,
     {
-      body: JSON.stringify({
-        stmt: sql,
-      }),
+      body: JSON.stringify(parameter),
     },
     {},
-  )
-    .post()
-    .json();
-
+  ).json();
   watch(data, (value) => {
     console.log('value', value);
   });
-  console.log(data);
 </script>
 
 <style lang="scss" scoped>

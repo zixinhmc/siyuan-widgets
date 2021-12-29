@@ -6,21 +6,24 @@
 </template>
 <script lang="ts" setup>
   import { watch } from 'vue';
-  import { useFetch } from '@vueuse/core';
+  import { useFetch } from '@/utils/useFetch';
   import HelloWorld from './components/HelloWorld.vue';
 
+  const sql =
+    'SELECT * FROM blocks WHERE path regexp "^/20211116085932-8rwiuh5" and path regexp "/{1}" and type = "d"';
+
   const { data } = useFetch(
-    'http://127.0.0.1:6806/api/query/sql',
+    'api/query/sql',
     {
-      mode: 'cors',
       body: JSON.stringify({
-        stmt: "SELECT * FROM blocks WHERE path regexp '^/20211116085932-8rwiuh5' and path regexp '/{1}' and type = 'd'",
+        stmt: sql,
       }),
     },
     {},
   )
     .post()
     .json();
+
   watch(data, (value) => {
     console.log('value', value);
   });

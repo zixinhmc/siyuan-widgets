@@ -1,16 +1,34 @@
 import { createFetch } from '@vueuse/core';
+import { MessageApi } from 'naive-ui/lib/message';
 
-export const useFetch = createFetch({
+const baseFetch = createFetch({
   baseUrl: 'http://127.0.0.1:6806',
-  options: {
-    afterFetch(ctx) {
-      // return JSON.parse(ctx.data).data;
-      // console.log('data', ctx.data.data);
-      return ctx.data;
-    },
-  },
   fetchOptions: {
     method: 'post',
     mode: 'cors',
   },
 });
+
+export function useFetch<T, K>(
+  path: string,
+  parameter: T,
+  message: MessageApi,
+) {
+  const { data } = baseFetch<K>(
+    path,
+    {
+      body: JSON.stringify(parameter),
+    },
+    {
+      afterFetch(ctx) {
+        return ctx.data;
+      },
+      onFetchError(ctx) {
+        message.error('服务器错误, 请稍后再试...');
+        return ctx;
+      },
+    },
+  ).json();
+
+  return { data };
+}

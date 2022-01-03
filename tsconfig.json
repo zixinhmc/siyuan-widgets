@@ -13,6 +13,11 @@
       "esnext",
       "dom"
     ],
+    "types": [
+      "node",
+      "webpack-env"
+    ],
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"

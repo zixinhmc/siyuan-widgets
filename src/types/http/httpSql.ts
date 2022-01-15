@@ -12,9 +12,11 @@ export interface ResultData {
   alias: string;
   box: string;
   created: string;
+  content: string;
   hash: string;
   hpath: string;
   ial: string;
+  id: string;
   length: number;
   markdown: string;
   memo: string;

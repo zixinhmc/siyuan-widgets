@@ -40,8 +40,15 @@
       title: '标题',
       key: 'title',
       render(row) {
-        console.log(document[row.id]);
-        return h('span', document[row.id].content?.content);
+        console.log('row', row);
+        return h(
+          'a',
+          {
+            class: 'text-blue-500',
+            href: `siyuan://blocks/${row.id}`,
+          },
+          { default: () => document[row.id].content?.content },
+        );
         // console.log('row', row);
         // return document[row.id].content || '';
       },
